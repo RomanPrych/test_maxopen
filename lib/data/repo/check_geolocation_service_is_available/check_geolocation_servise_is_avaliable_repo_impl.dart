@@ -6,8 +6,9 @@ class CheckGeolocationServiceIsAvailableRepoImpl
   @override
   Future<bool> isGeolocation() async {
     try {
-       print('>>>>>>>>>>>>>>${await Geolocator.isLocationServiceEnabled()}');
-      return await Geolocator.isLocationServiceEnabled();
+      LocationPermission permission = await Geolocator.requestPermission();
+      return permission != LocationPermission.denied &&
+          permission != LocationPermission.deniedForever;
     } catch (e) {
       print('ERROR CheckGeolocationServiceIsAvailableRepoImpl $e');
       return false;

@@ -17,13 +17,21 @@ class HomeProvider extends ChangeNotifier {
   final GetCurrentLocationCoordinatesRepo _getCurrentLocationCoordinatesRepo = locator.get<GetCurrentLocationCoordinatesRepo>();
 
   Future<void> init() async {
-    state.isInternet = isInternet;
+    state.isError = !isInternet || !isGeolocationAsses;
+    if(state.isError){
+      state.isError = true;
+      notifyListeners();
+      return;
+    }
     notifyListeners();
     state.coordinates = await _getCurrentLocationCoordinatesRepo.getCurrentLocation();
     if(state.coordinates != null){
       state.mapController.move(
           state.coordinates!, 6);
-
+      notifyListeners();
+    } else {
+      state.isError = true;
+      notifyListeners();
     }
   }
 
@@ -36,6 +44,6 @@ class HomeProvider extends ChangeNotifier {
 
 class HomeProviderState {
   MapController mapController = MapController();
-  bool isInternet = false;
+  bool isError = false;
   LatLng? coordinates;
 }

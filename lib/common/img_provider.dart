@@ -6,4 +6,5 @@ class ImgPr {
   static String home = 'assets/home.svg';
   static String profile = 'assets/profile.svg';
   static String list = 'assets/list.svg';
+  static String noInternet = 'assets/no_internet.svg';
 }

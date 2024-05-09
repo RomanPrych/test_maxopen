@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_maxopen/common/app_theme.dart';
 import 'package:test_maxopen/common/extensions/double_extension.dart';
 import 'package:test_maxopen/ui/home/provider/home_provider.dart';
 import 'package:test_maxopen/ui/home/widgets/add_car_widget.dart';
@@ -34,6 +33,7 @@ class HomeScreen extends StatelessWidget {
                 MapWidget(
                   coordinates: value.state.coordinates,
                   mapController: value.state.mapController,
+                  isError: value.state.isError,
                 ),
                 25.0.hsb,
                 const ButtonSimple(

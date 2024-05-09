@@ -6,9 +6,6 @@ class GetCurrentLocationCoordinatesRepoImpl implements GetCurrentLocationCoordin
   @override
   Future<LatLng?> getCurrentLocation() async {
     try {
-      LocationPermission permission = await Geolocator.requestPermission();
-      // LocationPermission permission = await Geolocator.checkPermission();
-
       Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       return LatLng(position.latitude, position.longitude);
     } catch (e) {
